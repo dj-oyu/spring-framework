@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Editing Entry</h1>
+    <form th:action="@{/blog/{id}/edit(id=*{id})}" th:method="post"
+        th:object="${entry}">
+        <p>
+            タイトル<input type="text" th:field="*{title}" />
+        </p>
+        <p>
+            <textarea cols="60" rows="10" th:field="*{body}">
+                本文
+            </textarea>
+        </p>
+        <p>
+        <button type="submit">更新</button>
+        </p>
+        <input th:field="*{create_time}">
+    </form>
+    <a href="/blog">一覧画面へ</a>
+</body>
+</html>
