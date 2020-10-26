@@ -4,11 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Spring ブログ</title>
 <link rel="stylesheet" th:href="@{tailwind/tailwind.css}">
 <style>
-.svg_bg{
-background:url("data:image/svg+xml;charset=utf-8,%3csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 2 2' preserveAspectRatio='none'%3e%3cpath fill='%2362b64f' d='M-1-1v4h4v-4z'/%3e%3cpath fill='%2388d057' d='M1-1h1.34l-4 4v-1.34zM3-1v1.34l-4 4h-1.34z'/%3e%3c/svg%3e");}
+.svg_bg {
+	background:
+		url("data:image/svg+xml;charset=utf-8,%3csvg version='1.1' xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 2 2' preserveAspectRatio='none'%3e%3cpath fill='%2362b64f' d='M-1-1v4h4v-4z'/%3e%3cpath fill='%2388d057' d='M1-1h1.34l-4 4v-1.34zM3-1v1.34l-4 4h-1.34z'/%3e%3c/svg%3e");
+}
 </style>
 </head>
 
@@ -25,30 +27,42 @@ background:url("data:image/svg+xml;charset=utf-8,%3csvg version='1.1' xmlns='htt
 		<div class="flow-root -mx-2">
 			<div class="w-full md:w-3/4 px-2 pt-2 pb-4 mx-auto"
 				th:each="entry : ${entries}" th:object="${entry}">
-				<div class="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
+				<div
+					class="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
 					<div class="text-xl font-bold text-gray-900 px-2">
-						[[${entry.title}]]
-					</div>
+						[[${entry.title}]]</div>
 					<div class="p-4">
-						<p class="">[[${entry.body}]]</p>
+						<p class="">
+							<th:block th:if="${entry.body}" )>
+								<th:block
+									th:each="str, stat : ${entry.body.split('\r\n|\r|\n',-1)}">
+									<th:block th:text="${str}"></th:block>
+									<br th:if=${!stat.last}>
+								</th:block>
+							</th:block>
+						</p>
 					</div>
-					<div class="flex flex-row content-end">
-						<div class="pl-2 pb-3">
-							<a
-								class="block h-8 self-stretch px-6 rounded-full bg-gray-100 shadow-md hover:bg-green-300"
-								th:href="@{/blog/{id}/edit(id=*{id})}">edit</a>
+					<div class="flex flex-row">
+						<div class="flex flex-grow items-end">
+							<div class="mb-4 ml-2">
+								<a
+									class="px-4 py-3 rounded-full bg-gray-100 shadow-md hover:bg-green-300 outline-none"
+									th:href="@{/blog/{id}/edit(id=*{id})}">edit</a>
+							</div>
+							<div class="mb-2 ml-2">
+								<form th:action="@{/blog/{id}/delete(id=*{id})}"
+									th:method="post">
+									<input
+										class="px-3 py-2 rounded-full shadow-md hover:bg-red-500 hover:text-white cursor-pointer outline-none"
+										type="submit" value="削除">
+								</form>
+							</div>
+
 						</div>
-						<div class="pl-2 pb-3 flex-grow">
-							<form th:action="@{/blog/{id}/delete(id=*{id})}" th:method="post">
-								<input
-									class="self-stretch h-8 px-3 rounded-full shadow-md hover:bg-red-500 hover:text-white"
-									type="submit" value="削除">
-							</form>
-						</div>
-						<div class="text-right">
-							<div class="py-2 px-1 mr-3 bg-gray-200"	th:text="*{create_time}"></div>
-							<div class="py-2 px-1 mr-3 bg-gray-200" th:if="*{update_time}"
-								th:text="'update ' + *{update_time}"></div>
+						<div class="text-right mb-1">
+							<div class="py-2 px-1 mr-3 bg-gray-200" th:text="*{createTime}"></div>
+							<div class="py-2 px-1 mr-3 bg-gray-200" th:if="*{updateTime}"
+								th:text="'update ' + *{updateTime}"></div>
 						</div>
 					</div>
 				</div>
@@ -56,7 +70,8 @@ background:url("data:image/svg+xml;charset=utf-8,%3csvg version='1.1' xmlns='htt
 		</div>
 	</div>
 	<div class="flex justify-center">
-		<div class="px-6 py-2 w-auto bg-green-300 rounded shadow-inner hover:bg-green-200">
+		<div
+			class="px-6 py-2 w-auto mb-8 bg-green-300 rounded shadow-inner hover:bg-green-200">
 			<a class="text-gray-800" id="new_entry" href="/blog/new">新規作成</a>
 		</div>
 	</div>

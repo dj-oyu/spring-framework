@@ -16,7 +16,7 @@ public class BlogService {
 	BlogRepository repository;
 
 	public List<BlogEntry> findAll(){
-		return repository.findAll();
+		return repository.findAllByOrderByCreateTimeDesc();
 	}
 
 	public BlogEntry findOne(Integer id) {
@@ -30,12 +30,12 @@ public class BlogService {
 	}
 
 	public BlogEntry register(BlogEntry entry) {
-		entry.setCreate_time( LocalDateTime.now() );
+		entry.setCreateTime( LocalDateTime.now() );
 		return repository.save(entry);
 	}
 
 	public BlogEntry update(BlogEntry entry) {
-		entry.setUpdate_time( LocalDateTime.now() );
+		entry.setUpdateTime( LocalDateTime.now() );
 		return repository.save(entry);
 	}
 

@@ -27,11 +27,11 @@ public class BlogEntry {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name="create_time")
-	private LocalDateTime create_time;
+	@Column(name="createTime")
+	private LocalDateTime createTime;
 
-	@Column(name="update_time")
-	private LocalDateTime update_time;
+	@Column(name="updateTime")
+	private LocalDateTime updateTime;
 
 	@Column(name="title")
 	private String title;
