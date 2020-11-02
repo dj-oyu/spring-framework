@@ -45,20 +45,33 @@ public class BlogMainController {
 
 	@PostMapping
 	public String create(@ModelAttribute BlogEntry entry) {
-		blogService.register(entry);
+		try {
+			blogService.register(entry);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/blog";
 	}
 
 	@PostMapping("{id}/edit")
 	public String edit(@PathVariable Integer id, @ModelAttribute BlogEntry entry) {
-		entry.setId(id);
-		blogService.update(entry);
+		try {
+			entry.setId(id);
+			blogService.update(entry);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/blog";
 	}
 
 	@PostMapping("{id}/delete")
 	public String destroy(@PathVariable Integer id) {
-		blogService.delete(id);
+		try {
+			blogService.delete(id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/blog";
 	}
+
 }

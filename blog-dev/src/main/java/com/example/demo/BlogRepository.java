@@ -10,21 +10,4 @@ public interface BlogRepository extends JpaRepository<BlogEntry, Integer> {
 
 	List<BlogEntry> findAllByOrderByCreateTimeDesc();
 
-//	@Modifying
-//	@Transactional
-//	@Query(value = "INSERT INTO myDB.blog_entry (id) VALUES (10)"
-//			, nativeQuery = true)
-//	void insertTestIdA();
-//
-//	@Modifying
-//	@Transactional
-//	@Query(value = "INSERT INTO myDB.blog_entry (id) values (20)"
-//			, nativeQuery = true)
-//	void insertTestIdB();
-//
-//	@Modifying
-//	@Transactional
-//	@Query(value = "INSERT INTO myDB.blog_entry (id) VALUES (10)"
-//			, nativeQuery = true)
-//	void insertTestIdC();
 }

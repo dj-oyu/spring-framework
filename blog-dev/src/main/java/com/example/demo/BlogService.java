@@ -31,6 +31,7 @@ public class BlogService {
 
 	public BlogEntry register(BlogEntry entry) {
 		entry.setCreateTime( LocalDateTime.now() );
+
 		return repository.save(entry);
 	}
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<h1 id="section-1">セクション1</h1>
+
+	<form action="/test" method="post">
+		<input type="number" name="id" id="id"> <label for="id">ユーザID</label>
+		<input type="text" name="userName" id="userName"> <label
+			for="userName">ユーザ名</label>
+		<p>コメント</p>
+		<textarea name="comment" cols="10" rows="5"></textarea>
+		<button type="submit">登録</button>
+	</form>
+	<div th:each="item : ${entities}" th:object="${item}">
+		<span th:text="${item.id}"></span> <span th:text="${item.userName}"
+			style="font-size: 1.3rem;"></span>
+		<div th:text="${item.comment}"></div>
+
+	</div>
+</body>
+<script>
+
+</script>
+</html>
